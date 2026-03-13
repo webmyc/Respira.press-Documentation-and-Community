@@ -36,17 +36,17 @@
               {
                 "title": "Browser AI Setup",
                 "path": "browser-ai",
-                "icon": "globe"
+                "icon": "https://www.respira.press/logos/google-antigravity-icon.webp"
               },
               {
                 "title": "WordPress AI Stack",
                 "path": "wordpress-ai-stack",
-                "icon": "plug-zap"
+                "icon": "https://www.respira.press/logos/wordpress-blue-logo.svg"
               },
               {
                 "title": "Desktop AI (MCP Server)",
                 "path": "mcp-server",
-                "icon": "monitor"
+                "icon": "https://www.respira.press/articles/mcp-logo-og.png"
               },
               {
                 "title": "Elementor Angie",
