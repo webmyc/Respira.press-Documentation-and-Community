@@ -140,3 +140,30 @@ Beaver Themer layouts (headers, footers, archives) are fully supported:
 - [wordpress_update_module](/tools/builders/update-module) - Update specific modules
 - [wordpress_inject_builder_content](/tools/builders/inject-content) - Replace entire structure
 - [Page Builder Overview](/builders/overview) - Compare all supported builders
+
+## v5.2.0 Elemental — New Capabilities
+
+### HTML-to-Beaver Conversion
+
+The `convert_html_to_builder` tool now fully supports Beaver Builder with:
+
+**Type Mapping:**
+- heading → `heading` module
+- text/paragraph → `rich-text` module
+- image → `photo` module
+- button/link → `button` module
+- video → `video` module
+- divider → `separator` module
+- tables, forms, unknown → `html` module (fallback)
+
+**Multi-Column Layout:** Flex-row and grid layouts in source HTML are converted to Beaver Builder's `column-group > column` structure.
+
+**Content Merging:** HTML content is mapped to BB-native settings keys:
+- Headings → `settings.heading` + `settings.tag`
+- Rich text → `settings.text` (HTML preserved)
+- Photos → `settings.photo_src` + `settings.photo_source`
+- Buttons → `settings.text` + `settings.link`
+
+### Support Level
+
+Beaver Builder has **Smart Defaults** support — element operations work via the generic tree utility with builder-specific content merging.

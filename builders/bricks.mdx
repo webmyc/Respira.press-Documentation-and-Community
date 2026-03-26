@@ -142,3 +142,17 @@ Bricks theme styles define default styling. Respira preserves these while updati
 - [wordpress_update_module](/tools/builders/update-module) - Update specific elements
 - [wordpress_inject_builder_content](/tools/builders/inject-content) - Replace entire structure
 - [Page Builder Overview](/builders/overview) - Compare all supported builders
+
+## v5.2.0 Elemental — New Capabilities
+
+### CSS Regeneration
+
+Bricks 2.2+ requires explicit CSS regeneration after content changes. Respira now fires `do_action('bricks/generate_css_file', $post_id)` after every `inject_content()` call, ensuring the frontend reflects changes immediately.
+
+### Cache Invalidation on Approval Merge
+
+When you approve a duplicate change, Respira clears Bricks' page cache and triggers CSS regeneration on the original post. This prevents the "approved but frontend shows old content" issue.
+
+### Support Level
+
+Bricks has **Smart Defaults** support — element operations work via the generic tree utility with Bricks-specific CSS regeneration.

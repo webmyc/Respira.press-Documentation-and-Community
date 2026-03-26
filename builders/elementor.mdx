@@ -142,3 +142,51 @@ Elementor Pro's Theme Builder templates (headers, footers, single post templates
 - [wordpress_update_module](/tools/builders/update-module) - Update specific widgets
 - [wordpress_inject_builder_content](/tools/builders/inject-content) - Replace entire structure
 - [Page Builder Overview](/builders/overview) - Compare all supported builders
+
+## v5.2.0 Elemental — New Capabilities
+
+### Dynamic Schemas
+
+Respira reads the Elementor control registry at runtime and generates JSON Schemas for every widget installed on your site. This means AI agents know the exact settings, types, and valid values — including third-party widgets.
+
+The schema generator maps Elementor control types to JSON Schema:
+- TEXT, TEXTAREA → string
+- NUMBER, SLIDER → number (with min/max)
+- SELECT, CHOOSE → string (enum)
+- COLOR → string (format: color)
+- MEDIA → object {url, id}
+- REPEATER → array
+- GROUP → object (recursive)
+
+Schemas are cached for 12 hours and invalidated when Elementor's version changes.
+
+### Settings Validator
+
+Before saving, Respira validates widget settings against the dynamic schema. If a setting name is close but not exact, you get a "did you mean?" suggestion:
+
+> Unknown setting 'titel' for heading widget. Did you mean 'title'?
+
+### Element-Level Operations
+
+Instead of downloading the entire page JSON, AI agents can now target individual widgets:
+
+- `find_element` — locate by ID, type, CSS class, or text content
+- `update_element` — change settings on a single widget
+- `move_element` — reposition within the page tree
+- `duplicate_element` — clone with new ID
+- `remove_element` — delete from page
+
+### HTML-to-Elementor Conversion
+
+The `convert_html_to_builder` tool maps CSS properties directly to Elementor widget settings:
+- Background colors, gradients → background_color, background_image
+- Typography (font, size, weight) → typography_* settings
+- Spacing (padding, margin) → padding/margin settings
+- Borders, shadows → border_*, box_shadow_* settings
+- Media queries → tablet/mobile responsive breakpoints
+
+CSS custom properties (design tokens) can be converted to Elementor Global Colors and Fonts when `preserve_tokens: true` is set.
+
+### Support Level
+
+Elementor has **Full Intelligence** support — the highest tier, with dynamic schemas, element operations, HTML conversion, and settings validation.

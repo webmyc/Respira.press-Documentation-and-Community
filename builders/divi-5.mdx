@@ -281,3 +281,46 @@ Use these resources to plan and execute your Divi 5 rollout with Respira:
 />
 
 </Columns>
+## v5.2.0 Elemental — New Capabilities
+
+### Divi 5 Intelligence Module
+
+Respira now includes comprehensive Divi 5 intelligence:
+
+**40+ Module Definitions** — Every Divi 5 module with full attribute schemas, self-closing vs container flags, and key attributes.
+
+**7 Page Patterns** — Real-world layout templates:
+1. Single-column centred content row
+2. Three-feature card row
+3. Hero section two-column
+4. Testimonials pattern
+5. CTA section
+6. Stats bar
+7. Animated background orbs
+
+**Design Token System** — Variable references for colors and fonts using Divi 5's `$variable()` syntax. Global colors and global variables are fully supported.
+
+**Flex Fraction System** — `flexColumnStructure` with N_24 fractions (24_24=100%, 12_24=50%, 8_24=33.3%, etc.).
+
+### 13-Point Payload Validation
+
+Before saving Divi 5 content, Respira validates:
+1. Root structure (`context: "et_builder"`)
+2. Data format (single key, string value)
+3. Placeholder wrapper present
+4. Section → Row → Column hierarchy enforced
+5. Module placement (must be inside column)
+6. `builderVersion` on every module
+7. Self-closing syntax (space + slash)
+8. Matching close tags on containers
+9. flexColumnStructure matches actual column count
+10. Heading title is plain text (no HTML)
+11. Button uses `linkUrl` / `linkTarget` (not Divi 4 names)
+12. Variable references include `settings: {}`
+13. Spacing sync uses string values ("on"/"off")
+
+16 actionable error messages guide AI agents to fix common mistakes.
+
+### Support Level
+
+Divi 5 has **Full Intelligence** support — the highest tier alongside Elementor.

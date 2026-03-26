@@ -5,7 +5,7 @@ description: "Reference for current Respira MCP tools. Find the right tool for p
 
 # Tools Reference
 
-Respira provides 80+ MCP tools for AI assistants to interact with WordPress. This reference documents the core categories and naming patterns.
+Respira provides 125 MCP tools for AI assistants to interact with WordPress. This reference documents the core categories and naming patterns.
 
 ## Tool Categories
 
@@ -166,6 +166,39 @@ Miscellaneous utilities.
 - [wordpress_validate_security](/tools/other/validate-security)
 - [wordpress_switch_site](/tools/other/switch-site)
 
+### Element Operations (7 tools) <span style={{color: '#10b981'}}>NEW in 5.2</span>
+
+Find, update, move, duplicate, and remove individual elements within any page builder.
+
+- `respira_find_element`
+- `respira_update_element`
+- `respira_move_element`
+- `respira_duplicate_element`
+- `respira_remove_element`
+- `respira_batch_update`
+- `respira_reorder_elements`
+
+### Page Building (3 tools) <span style={{color: '#10b981'}}>NEW in 5.2</span>
+
+Create complete pages, convert HTML prototypes, and apply bulk changes.
+
+- `respira_build_page`
+- `respira_convert_html_to_builder`
+- `respira_bulk_pages_operation`
+
+### Stock Images (2 tools) <span style={{color: '#10b981'}}>NEW in 5.2</span>
+
+Search and sideload openly-licensed images from Openverse.
+
+- `respira_search_stock_images`
+- `respira_sideload_image`
+
+### Widget Shortcuts (27 tools) <span style={{color: '#10b981'}}>NEW in 5.2</span>
+
+Quick single-element additions without building full page structures.
+
+- `respira_add_heading`, `respira_add_text`, `respira_add_button`, `respira_add_image`, `respira_add_video`, `respira_add_divider`, `respira_add_spacer`, `respira_add_icon`, `respira_add_icon_list`, `respira_add_social_icons`, `respira_add_form`, `respira_add_map`, `respira_add_counter`, `respira_add_progress_bar`, `respira_add_testimonial`, `respira_add_tabs`, `respira_add_accordion`, `respira_add_toggle`, `respira_add_alert`, `respira_add_html`, `respira_add_menu`, `respira_add_sidebar`, `respira_add_search`, `respira_add_gallery`, `respira_add_slider`, `respira_add_pricing_table`, `respira_add_section`
+
 ## Quick Reference Table
 
 | Category | Tools | Read-Only | Write |
@@ -175,7 +208,7 @@ Miscellaneous utilities.
 | Posts | 5 | 2 | 3 |
 | Builders | 3 | 1 | 2 |
 | Fidelity & Snapshots | 5 | 3 | 2 |
-| Analysis | 8 | 8 | 0 |
+| Analysis | 9 | 9 | 0 |
 | Menus | 12 | 4 | 8 |
 | Media | 5 | 2 | 3 |
 | Users | 5 | 2 | 3 |
@@ -185,11 +218,20 @@ Miscellaneous utilities.
 | Options | 4 | 2 | 2 |
 | Comments | 5 | 2 | 3 |
 | Other | 2 | 1 | 1 |
-| **Total** | **82** | **41** | **41** |
+| Element Operations | 7 | 1 | 6 |
+| Page Building | 3 | 0 | 3 |
+| Stock Images | 2 | 1 | 1 |
+| Widget Shortcuts | 27 | 0 | 27 |
+| Analysis (new) | 9 | 9 | 0 |
+| **Total** | **125** | **45** | **80** |
 
 ## Tool Naming Convention
 
 All tools follow the pattern: `wordpress_[action]_[resource]`
+
+<Callout kind="info">
+Starting in v5.2.0, all tools are available with both `respira_*` (preferred) and `wordpress_*` (deprecated) prefixes. New tools only use `respira_*` names. The `wordpress_*` names will be removed in a future major version.
+</Callout>
 
 - `list_*` - Get multiple items
 - `get_*` / `read_*` - Get single item
@@ -203,7 +245,7 @@ All tools follow the pattern: `wordpress_[action]_[resource]`
 
 ### How many tools does Respira have?
 
-Desktop MCP currently provides `82` tools across the categories above. With WooCommerce add-on tools enabled, the inventory increases further (see [Release History](/changelog) for exact contract changes by version).
+Respira provides **125** tools across the categories above (39 new in v5.2.0 Elemental). With WooCommerce add-on tools enabled, the inventory increases further.
 
 ### What's the difference between read-only and write tools?
 

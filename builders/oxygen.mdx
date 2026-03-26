@@ -140,3 +140,13 @@ Oxygen can include Gutenberg blocks via Inner Content. Respira can edit both the
 - [wordpress_update_module](/tools/builders/update-module) - Update specific components
 - [wordpress_inject_builder_content](/tools/builders/inject-content) - Replace entire structure
 - [Page Builder Overview](/builders/overview) - Compare all supported builders
+
+## v5.2.0 Elemental — Fix
+
+### ct_template Detection
+
+Fixed: Oxygen templates using only `ct_builder_json` (without `ct_builder_shortcodes`) were not detected by `is_builder_used()`. Respira now checks both meta keys, matching the logic already used in content extraction.
+
+### Support Level
+
+Oxygen has **Smart Defaults** support — element operations work via the generic tree utility.

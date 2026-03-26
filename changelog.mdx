@@ -9,6 +9,92 @@ This page is the official changelog and download hub for both Respira for WordPr
 
 ## WordPress Plugin Releases
 
+<Update label="2026-03-27" description="Respira for WordPress v5.2.0 + MCP Server v5.2.0 — Elemental" tags={["feature", "builders", "mcp", "security", "tools"]}>
+
+### What's New in 5.2.0 "Elemental"
+
+The biggest upgrade to Respira's page builder intelligence. **39 new tools. 125 total.**
+
+**Element-Level Editing (7 tools)**
+- `find_element`, `update_element`, `move_element`, `duplicate_element`, `remove_element`, `batch_update`, `reorder_elements` — target individual widgets without downloading the entire page.
+
+**Page Building**
+- `build_page` — create a complete page from a declarative structure in one API call. Returns preview URL.
+- 27 widget shortcuts: `add_heading`, `add_button`, `add_image`, `add_text`, `add_video`, and 22 more.
+
+**HTML-to-Builder Conversion**
+- `convert_html_to_builder` — converts HTML/CSS prototypes into native builder content with CSS extraction, section mapping, style translation, and fidelity scoring.
+
+**Bulk Operations**
+- `bulk_pages_operation` — apply changes across up to 100 pages. Built-in ops: `strip_inline_styles`, `find_and_replace`, `custom`. Rate-limited with mandatory snapshots.
+
+**Stock Images**
+- `search_stock_images` and `sideload_image` — search Openverse, sideload with CC attribution, SSRF-protected.
+
+**Tool Governance**
+- Admin UI to disable/enable any MCP tool per-site. Single enforcement chokepoint for REST, Abilities API, and MCP.
+
+**API Key Access Profiles**
+- Generate keys with scoped permissions: Full Access, Read Only, Content Editor, or Builder. Two-layer security with governance.
+
+**Builder Intelligence**
+- Elementor dynamic schemas — runtime widget schema generation with "did you mean?" validation.
+- Divi 5 intelligence — 40+ modules, 7 page patterns, design tokens, 13-point validation.
+- Beaver Builder HTML conversion pipeline.
+- Bricks CSS regeneration on inject and approval merge.
+- Oxygen ct_template detection fix (checks both meta keys).
+
+**Infrastructure**
+- Version migration engine for safe upgrades from any previous version.
+- Dual tool naming: `respira_*` (preferred) alongside deprecated `wordpress_*`.
+- Version negotiation endpoint + plugin version header.
+- UTF-8 passthrough for multibyte characters.
+- Frontend cache purge for 9 cache plugins.
+- RankMath SEO analysis tool.
+- Direct edit mode — writes go straight to original when enabled.
+- Top API Keys dashboard table for usage visibility.
+
+**Fixes:** Oxygen ct_template detection, SQLite/Playground compatibility, trial-to-paid license orphans, duplicate admin banners, direct edit mode, trial emails for paid users, Gemini MCP schema compliance, Bricks approval merge cache.
+
+### Recommended Versions
+
+- Respira for WordPress plugin: `5.2.0+`
+- MCP server: `5.2.0+`
+
+</Update>
+
+<Update label="2026-03-18" description="Respira for WordPress v4.4.1" tags={["bugfix", "seo", "i18n"]}>
+
+### What's New
+
+- Fixed character-based length counting for SEO meta title/description (was byte-based — Cyrillic showed ~1.75x actual length).
+- Fixed Unicode-aware word tokenizer for non-ASCII scripts in word count and keyword density.
+- Fixed Open Graph detection for RankMath, AIOSEO, and SEOPress (was only detecting Yoast).
+- Fixed schema detection for RankMath and AIOSEO sites.
+
+</Update>
+
+<Update label="2026-03-17" description="Respira for WordPress v4.3.5" tags={["bugfix", "divi"]}>
+
+### What's New
+
+- Fixed `include: "meta"` now resolves to `meta.allowlisted` as expected.
+- Fixed Divi Theme Builder meta writes reflected in before/after hashes.
+- Added 10 Divi Theme Builder meta keys to the default allowlist.
+
+</Update>
+
+<Update label="2026-03-14" description="Respira for WordPress v4.2.3" tags={["feature", "bricks", "bugfix"]}>
+
+### What's New
+
+- Added Bricks `browser_events` map for WebMCP DOM event awareness.
+- Added Bricks duplicate filter gate for ID-dedup sync.
+- Fixed Bricks 2.2 "inject succeeds but frontend shows no change" — CSS regeneration now fires on every inject.
+- Fixed wrong Bricks meta key in AI context (missing `_2` suffix).
+
+</Update>
+
 <Update label="2026-03-12" description="Respira for WordPress v4.2.0 + MCP Server v4.0.0" tags={["feature", "agency", "mcp", "safety", "efficiency"]}>
 
 ### What's New
