@@ -56,6 +56,16 @@ Go to **respira.press → Dashboard → MCP Setup**. Use one of the generated se
 
 This flow is account-wide and supports stacked plans + multi-site inventories automatically.
 
+### Quick setup with add-mcp
+
+The fastest way to connect any MCP-compatible AI tool. One command auto-detects your client (Cursor, Claude Code, Windsurf, etc.) and writes the config:
+
+```bash
+npx add-mcp "npx -y @respira/wordpress-mcp-server"
+```
+
+Then set environment variables `WORDPRESS_URL` and `WORDPRESS_API_KEY` in your client. You can find these values in **WordPress Admin → Respira → Setup → MCP**.
+
 ### Local/CLI setup fallback
 
 The MCP server ([@respira/wordpress-mcp-server](https://www.npmjs.com/package/@respira/wordpress-mcp-server)) runs locally and connects your AI assistant to WordPress:
@@ -81,11 +91,16 @@ npx -y @respira/wordpress-mcp-server
 ### CLI options
 
 ```bash
-npx @respira/wordpress-mcp-server --setup   # Run setup wizard
-npx @respira/wordpress-mcp-server --list    # List configured sites
-npx @respira/wordpress-mcp-server --test    # Test connection to default site
-npx @respira/wordpress-mcp-server --help    # Show help
+npx @respira/wordpress-mcp-server --setup    # Run setup wizard
+npx @respira/wordpress-mcp-server --doctor   # Diagnose connection, auth, and config issues
+npx @respira/wordpress-mcp-server --list     # List configured sites
+npx @respira/wordpress-mcp-server --test     # Test connection to default site
+npx @respira/wordpress-mcp-server --help     # Show help
 ```
+
+<Callout kind="info">
+Use `--doctor` when something isn't working. It checks Node.js version, config file validity, API key authentication, REST API reachability, and SSL certificates — then prints actionable fix suggestions for each issue found.
+</Callout>
 
 ## Step 4: Advanced/manual site configuration
 
@@ -178,7 +193,7 @@ Yes. Many users install the plugin on a staging or development site before enabl
 
 ### What should I do if something fails during installation?
 
-Run `npx @respira/wordpress-mcp-server --test` to test your connection. See the [Troubleshooting](/troubleshooting) guide for common issues and solutions.
+Run `npx @respira/wordpress-mcp-server --doctor` to diagnose common issues (config, auth, connectivity). You can also use `--test` to test a specific site connection. See the [Troubleshooting](/troubleshooting) guide for common issues and solutions.
 
 If you need help, contact support at [word@respira.press](mailto:word@respira.press).
 
