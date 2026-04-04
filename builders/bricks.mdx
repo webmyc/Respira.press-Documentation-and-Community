@@ -1,6 +1,6 @@
 ---
 title: "Bricks Builder Reference"
-description: "Technical documentation for using Respira with Bricks Builder: JSON-based elements, targeting strategies, and safe editing workflows."
+description: "Technical documentation for using Respira with Bricks Builder: 20 Deep Intelligence tools, element-level editing, design system inspection, and safe editing workflows."
 ---
 
 # Bricks Builder Reference
@@ -9,11 +9,27 @@ Technical documentation for using Respira with [Bricks Builder](https://bricksbu
 
 ## About Bricks
 
-[Bricks Builder](https://bricksbuilder.io/) is a modern, performance-focused WordPress page builder that stores content as lightweight JSON. It's known for clean code output and developer-friendly features, with over 80 elements available.
+[Bricks Builder](https://bricksbuilder.io/) is a modern, performance-focused WordPress page builder that stores content as lightweight JSON. It's known for clean code output, developer-friendly features, and over 80 elements. Respira has **full native support** for Bricks — including 20 dedicated Deep Intelligence tools that go beyond content editing into design system inspection, ACSS integration, query loops, and component management.
+
+## Support Level
+
+Bricks has **Full Native Support** — the deepest integration level available in Respira:
+
+- Element-level read/write with proper flat-array round-tripping
+- 20 dedicated Bricks Deep Intelligence tools
+- Design system inspection (colors, typography, theme styles, global classes)
+- ACSS (Automatic.css) detection and import
+- Query loop inspection
+- Component management
+- Widget shortcuts for all common Bricks element types
+- CSS regeneration after every content change
+- Cache invalidation on duplicate approval
+
+---
 
 ## Data Structure
 
-Bricks stores page structure as JSON in post meta (`_bricks_page_content_2`). Elements are organized in a flat array with parent-child relationships:
+Bricks stores page structure as JSON in post meta (`_bricks_page_content_2`). Elements are organized in a **flat array** — each element carries both a `parent` reference (pointing up) and a `children` array (pointing down by ID string). Respira handles this round-trip automatically.
 
 ```json
 {
@@ -22,12 +38,14 @@ Bricks stores page structure as JSON in post meta (`_bricks_page_content_2`). El
       "id": "abc123",
       "name": "section",
       "parent": 0,
+      "children": ["def456", "ghi789"],
       "settings": { "tag": "section" }
     },
     {
       "id": "def456",
       "name": "heading",
       "parent": "abc123",
+      "children": [],
       "settings": {
         "text": "Welcome to Our Site",
         "_cssId": "hero-heading"
@@ -35,39 +53,74 @@ Bricks stores page structure as JSON in post meta (`_bricks_page_content_2`). El
     },
     {
       "id": "ghi789",
-      "name": "button",
+      "name": "basic-text",
       "parent": "abc123",
+      "children": [],
       "settings": {
-        "text": "Get Started",
-        "link": { "url": "/contact" }
+        "text": "<p>Body copy goes here.</p>"
       }
     }
   ]
 }
 ```
 
-## Module Identification
+Note: `parent: 0` means the element is a top-level root. Child IDs in `children` are strings, not integers.
+
+---
+
+## Common Elements
+
+| Element | Bricks Type | Key Settings |
+|---------|-------------|--------------|
+| Section | `section` | tag, width, padding |
+| Container | `container` | direction, layout, gap |
+| Block | `block` | layout settings |
+| Heading | `heading` | text, tag (h1–h6) |
+| Basic Text | `basic-text` | text (HTML) |
+| Rich Text | `text-basic` | text (HTML) |
+| Button | `button` | text, link, style |
+| Image | `image` | image (id, url, alt) |
+| Icon | `icon` | icon, link |
+| Video | `video` | videoType, videoId |
+| Map | `map` | address, zoom |
+| Search | `search` | placeholder |
+| Social Links | `social-links` | items array |
+| Pricing Table | `pricing-table` | title, price, features |
+| Slider | `slider` | slides array |
+| Divider | `divider` | style, width |
+| Spacer | `spacer` | height |
+
+### Widget Shortcuts
+
+When using `respira_add_*` shortcut tools, Respira maps generic widget names to the correct Bricks type automatically:
+
+| Generic name | Bricks type |
+|---|---|
+| `text-editor` | `text-basic` |
+| `google-maps` | `map` |
+| `search-form` | `search` |
+| `social-icons` | `social-links` |
+| `price-table` | `pricing-table` |
+| `slides` | `slider` |
+
+---
+
+## Element Targeting
 
 ### By CSS ID (Recommended)
 
-Set in Bricks: Element → Style → CSS → ID:
+Set in Bricks: Element → Style → CSS → ID. Then target with:
 
 ```json
-{ "admin_label": "hero-heading" }
+{ "css_id": "hero-heading" }
 ```
 
-### By Element Name
+### By Admin Label
 
-Label important elements in the structure panel:
+Label important elements in the structure panel. Then target with:
 
 ```json
 { "admin_label": "Hero CTA Button" }
-```
-
-### By Path
-
-```json
-{ "path": "elements[2]" }
 ```
 
 ### By Type and Content
@@ -76,83 +129,146 @@ Label important elements in the structure panel:
 { "type": "button", "match_content": "Get Started" }
 ```
 
-## Common Elements
+### By Path
 
-| Element | Type | Key Settings |
-|---------|------|--------------|
-| Heading | `heading` | text, tag |
-| Text | `text` | text (HTML content) |
-| Button | `button` | text, link |
-| Image | `image` | image (id, url, alt) |
-| Icon | `icon` | icon, link |
-| Video | `video` | videoType, videoId |
-| Container | `container` | layout settings |
-| Section | `section` | tag, width |
-| Block | `block` | layout settings |
-| Divider | `divider` | style |
+```json
+{ "path": "elements[2]" }
+```
 
-## Example Prompts for Bricks
+---
 
-**Content Updates:**
+## Bricks Deep Intelligence Tools (v5.4.0+)
 
-- "Update the element labeled 'Hero CTA' to link to /contact"
-- "Change the heading with ID 'hero-heading' to 'Welcome Home'"
-- "Replace all button text 'Learn More' with 'Get Started'"
+Respira ships 20 dedicated tools for deep Bricks inspection and management. These go beyond content editing — use them to audit and maintain the design system.
 
-**Structure Queries:**
+### Design System
 
-- "Extract Bricks structure for page 42"
-- "List all buttons on the homepage"
-- "Show me the element hierarchy"
+| Tool | What it does |
+|------|-------------|
+| `respira_bricks_design_system` | Full design system snapshot: colors, typography, theme styles, global classes, breakpoints — everything in one call |
+| `respira_get_bricks_color_palette` | Read all color variables and their values |
+| `respira_update_bricks_color_palette` | Update one or more color variables site-wide |
+| `respira_get_bricks_typography` | Read all typography presets |
+| `respira_update_bricks_typography` | Update typography presets |
+| `respira_get_bricks_theme_styles` | Read global theme styles |
+| `respira_update_bricks_theme_styles` | Update theme styles |
 
-**Bulk Updates:**
+### Global Classes
 
-- "Find all buttons and change their background color setting"
-- "Update the phone number across all sections"
-- "Change all H3 headings to H2"
+| Tool | What it does |
+|------|-------------|
+| `respira_list_bricks_global_classes` | List all registered global classes |
+| `respira_create_bricks_global_class` | Create a new global class with CSS properties |
+| `respira_update_bricks_global_class` | Update an existing global class |
+| `respira_delete_bricks_global_class` | Delete a global class |
 
-## Global Elements
+### Components & Templates
 
-Bricks global elements and templates are editable through Respira:
+| Tool | What it does |
+|------|-------------|
+| `respira_list_bricks_components` | List all Bricks components/templates |
+| `respira_get_bricks_component` | Get a specific component's structure |
+| `respira_apply_bricks_component` | Apply a component to a page location |
 
-- "List all Bricks templates" → Shows template library
-- "Update the global header logo" → Changes it site-wide
+### Health & Intelligence
 
-## Theme Styles
+| Tool | What it does |
+|------|-------------|
+| `respira_bricks_health_check` | Audit the site for Bricks-specific issues: broken elements, missing classes, orphaned IDs |
+| `respira_bricks_style_profile` | Profile CSS usage patterns and identify redundancies |
+| `respira_bricks_detect_acss` | Detect if Automatic.css (ACSS) is installed and active |
+| `respira_bricks_import_acss` | Import ACSS variables into the Bricks color/typography system |
+| `respira_bricks_query_loops` | List and inspect all query loops on the site |
+| `respira_search_bricks_elements` | Search all pages for elements matching type, class, or content |
 
-Bricks theme styles define default styling. Respira preserves these while updating content.
+---
+
+## Element-Level Tools
+
+These tools work with Bricks (and all other supported builders) for targeted edits without touching the full page structure:
+
+| Tool | What it does |
+|------|-------------|
+| `respira_find_element` | Search for elements by text, CSS class, type, or ID across a page |
+| `respira_update_element` | Update a single element's settings in-place |
+| `respira_batch_update` | Update multiple elements atomically (one extract, one inject) |
+| `respira_move_element` | Move an element to a different parent or position |
+| `respira_duplicate_element` | Clone an element (inserted after the original) |
+| `respira_remove_element` | Delete an element |
+| `respira_reorder_elements` | Reorder sibling elements within a container |
+
+---
+
+## Example Prompts
+
+**Content updates:**
+- "Change the heading with CSS ID 'hero-heading' to 'Welcome Home'"
+- "Update all button text 'Learn More' to 'Get Started'"
+- "Replace the phone number in the footer section"
+
+**Design system:**
+- "Show me the full Bricks design system for this site"
+- "What colors are defined in the Bricks color palette?"
+- "Update the primary color to #E03D3D"
+- "List all global classes that use font-size"
+
+**Structure & intelligence:**
+- "Run a Bricks health check on this site"
+- "Find all query loops and list their sources"
+- "Search for all elements with the class 'hero-btn'"
+- "Is ACSS installed on this site?"
+
+**Page-level:**
+- "Extract the full Bricks structure for page 42"
+- "Build a hero section with a heading, subheading, and CTA button"
+- "Convert this HTML mockup to Bricks elements"
+
+---
+
+## Global Elements & Templates
+
+Bricks global elements and templates are accessible through Respira:
+
+```
+"List all Bricks templates" → respira_list_bricks_components
+"Get the global header component" → respira_get_bricks_component
+"Apply the hero template to page 12" → respira_apply_bricks_component
+```
+
+---
 
 ## Limitations
 
-- **Complex interactions**: Bricks interactions (scroll, click triggers) may need the builder
-- **Query loops**: Dynamic query loop settings are preserved but need the builder for changes
-- **Conditions**: Display conditions are preserved but not directly editable
-- **Custom CSS**: Per-element CSS is preserved; complex styling changes may need the builder
+- **Complex interactions**: Bricks scroll/click triggers are preserved but require the visual builder to configure
+- **Query loop data sources**: Inspectable via `respira_bricks_query_loops`, but changing the data source requires the builder
+- **Display conditions**: Preserved as-is; not directly editable via MCP
+- **Per-element custom CSS**: Preserved; complex styling changes may be easier in the builder
 
-## When to Use This Tool
-
-- **Content updates** - Change text, links, and images without opening the builder
-- **Bulk edits** - Update repeated content across multiple pages
-- **SEO optimization** - Fix heading hierarchy or add missing content
-- **Template maintenance** - Update global elements after initial design
+---
 
 ## See Also
 
-- [wordpress_extract_builder_content](/tools/builders/extract-content) - View page structure
-- [wordpress_update_module](/tools/builders/update-module) - Update specific elements
-- [wordpress_inject_builder_content](/tools/builders/inject-content) - Replace entire structure
-- [Page Builder Overview](/builders/overview) - Compare all supported builders
+- [`respira_find_element`](/tools/element-ops/find-element) — Find elements by content, type, or class
+- [`respira_update_element`](/tools/element-ops/update-element) — Update a single element
+- [`respira_extract_builder_content`](/tools/builders/extract-content) — Get full page structure
+- [`respira_inject_builder_content`](/tools/builders/inject-content) — Replace full page structure
+- [`respira_bricks_design_system`](/tools/bricks/design-system) — Full design system snapshot
+- [Page Builder Overview](/builders/overview) — Compare all supported builders
 
-## v5.2.0 Elemental — New Capabilities
+---
 
-### CSS Regeneration
+## v5.4.0 Elemental — Bricks Goes Deep
 
-Bricks 2.2+ requires explicit CSS regeneration after content changes. Respira now fires `do_action('bricks/generate_css_file', $post_id)` after every `inject_content()` call, ensuring the frontend reflects changes immediately.
+v5.4.0 ("Elemental series, part 2") shipped full native Bricks support including:
 
-### Cache Invalidation on Approval Merge
+- **20 Bricks Deep Intelligence tools** — design system, ACSS, global classes, components, health check, query loops, element search
+- **Element-level round-trip fix** — `children` arrays are now correctly rebuilt from `parent` references after every write, so pages no longer appear blank in the editor after MCP edits
+- **Widget shortcuts** — `respira_add_text`, `respira_add_button`, etc. now map to correct Bricks types automatically
+- **Validation bypass fix** — `batch_update` and structural operations no longer fail with "Content validation failed" on valid Bricks JSON
 
-When you approve a duplicate change, Respira clears Bricks' page cache and triggers CSS regeneration on the original post. This prevents the "approved but frontend shows old content" issue.
+## v5.2.0 Elemental — Foundation
 
-### Support Level
+v5.2.0 established the Bricks integration foundation:
 
-Bricks has **Smart Defaults** support — element operations work via the generic tree utility with Bricks-specific CSS regeneration.
+- **CSS Regeneration** — Respira fires `do_action('bricks/generate_css_file', $post_id)` after every `inject_content()` call, so the frontend reflects changes immediately without a manual CSS rebuild
+- **Cache Invalidation on Approval** — When a duplicate is approved, Respira clears Bricks' page cache and triggers CSS regeneration on the original post
