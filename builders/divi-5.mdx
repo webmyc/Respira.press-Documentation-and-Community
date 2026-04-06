@@ -281,6 +281,116 @@ Use these resources to plan and execute your Divi 5 rollout with Respira:
 />
 
 </Columns>
+## Divi 5 Simplified Settings (v5.5.3+)
+
+All `divi/*` modules accept a `settings` object with shorthand keys. Respira maps them to Divi 5's deep nested attribute paths automatically — no need to construct paths like `module.decoration.bodyFont.body.font.color.desktop.value`.
+
+### Content keys
+
+| Key | Maps to | Used by |
+|---|---|---|
+| `content` | Module body text/HTML | text, code, blurb, cta, accordion-item |
+| `title` / `heading` | Heading text | heading, blurb, cta, counter, pricing-table |
+| `body` | Body text | blurb, cta |
+| `button_text` | Button label | button, cta, pricing-table |
+| `button_url` | Button link URL | button, cta, pricing-table |
+| `src` | Image source URL | image, video |
+| `alt` | Image alt text | image |
+| `url` | Link URL | image, blurb |
+| `admin_label` | Editor panel label | all modules |
+| `author` | Author name | testimonial |
+| `job_title` | Job title | testimonial |
+| `company_name` | Company name | testimonial |
+| `portrait_url` | Portrait image | testimonial |
+| `number` | Counter value | counter |
+| `subtitle` | Subtitle text | pricing-table |
+| `currency` | Currency symbol | pricing-table |
+| `per` | Billing period text | pricing-table |
+| `sum` | Price amount | pricing-table |
+
+### Styling keys
+
+| Key | Description | Example value |
+|---|---|---|
+| `background_color` | Module background | `"#1a1a2e"` |
+| `background_image` | Background image URL | `"https://..."` |
+| `text_color` / `font_color` | Body text color | `"#333333"` |
+| `font_family` | Font family name | `"Inter"`, `"Open Sans"` |
+| `font_size` | Font size | `"18px"`, `"1.2rem"` |
+| `font_weight` | Font weight | `"bold"`, `"600"` |
+| `text_alignment` / `text_orientation` | Text alignment | `"left"`, `"center"`, `"right"` |
+| `padding` | CSS padding shorthand | `"40px 30px 40px 30px"` |
+| `margin` | CSS margin shorthand | `"0px 0px 20px 0px"` |
+| `heading_color` | Title/heading font color | `"#ffffff"` |
+| `heading_font` | Title/heading font family | `"Playfair Display"` |
+| `heading_font_size` | Title/heading font size | `"48px"` |
+| `header_level` / `tag` | Heading level (divi/heading) | `"h1"` – `"h6"` |
+| `button_color` | Button text color | `"#ffffff"` |
+| `button_bg_color` | Button background color | `"#4f46e5"` |
+| `button_border_color` | Button border color | `"#4f46e5"` |
+| `column_structure` | Row column widths (N_24 system) | `"12_24,12_24"` |
+
+### Examples
+
+**Styled heading:**
+
+```json
+{
+  "type": "divi/heading",
+  "settings": {
+    "title": "Welcome to Our Site",
+    "tag": "h1",
+    "heading_color": "#ffffff",
+    "heading_font": "Inter",
+    "heading_font_size": "48px",
+    "text_alignment": "center",
+    "background_color": "#1a1a2e",
+    "padding": "60px 40px 60px 40px"
+  }
+}
+```
+
+**Hero section with background:**
+
+```json
+{
+  "type": "divi/section",
+  "settings": {
+    "background_color": "#0f172a",
+    "padding": "100px 0px 100px 0px"
+  },
+  "children": [{
+    "type": "divi/row",
+    "settings": {"column_structure": "24_24"},
+    "children": [{
+      "type": "divi/column",
+      "children": [
+        {"type": "divi/heading", "settings": {"title": "Build Faster", "tag": "h1", "heading_color": "#ffffff", "heading_font_size": "56px", "text_alignment": "center"}},
+        {"type": "divi/text", "settings": {"content": "<p>Ship your WordPress site with AI-powered tools.</p>", "text_color": "#94a3b8", "font_size": "20px", "text_alignment": "center"}},
+        {"type": "divi/button", "settings": {"button_text": "Get Started", "button_url": "/pricing", "button_bg_color": "#4f46e5", "button_color": "#ffffff"}}
+      ]
+    }]
+  }]
+}
+```
+
+**Two-column feature row:**
+
+```json
+{
+  "type": "divi/row",
+  "settings": {"column_structure": "12_24,12_24"},
+  "children": [
+    {"type": "divi/column", "children": [{"type": "divi/blurb", "settings": {"title": "Fast Setup", "content": "<p>Connect in under 2 minutes.</p>", "heading_color": "#1e293b", "text_color": "#64748b"}}]},
+    {"type": "divi/column", "children": [{"type": "divi/blurb", "settings": {"title": "Secure by Default", "content": "<p>API keys, snapshots, governance.</p>", "heading_color": "#1e293b", "text_color": "#64748b"}}]}
+  ]
+}
+```
+
+> You can mix simplified `settings` with raw `attributes` in the same node. Settings are applied first, then any explicit `attributes` override them. Use `attributes` for Divi 5-specific features not covered by the simplified keys.
+
+---
+
 ## v5.2.0 Elemental — New Capabilities
 
 ### Divi 5 Intelligence Module

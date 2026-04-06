@@ -8,6 +8,26 @@ description: "Official changelog and release notes for Respira for WordPress plu
 This page is the official changelog and download hub for both Respira for WordPress and the MCP server. You can use it to review version history, check release notes before upgrading, and download the latest stable builds.
 
 ## WordPress Plugin Releases
+<Update label="2026-04-06" description="Respira for WordPress v5.5.3 — Divi 5 Revision Fix + Settings Schema" tags={["fix", "builders", "divi"]}>
+
+### What's New in 5.5.3
+
+**Divi 5 Fixes**
+- `inject_builder_content`, `update_element`, `batch_update`, `move_element` — all Divi 5 mutations now correctly update the visual builder. The root cause: Divi's `convert_divi_blocks_before_save` filter was stripping block content from revisions created via `wp_save_post_revision()`. Revisions are now written directly to the database, bypassing Divi's filter.
+- Trial badge no longer stuck after license upgrade — transient cache cleared on validation.
+
+**Divi 5 Simplified Settings Schema**
+- All `divi/*` modules now accept a `settings` object with 30+ shorthand keys for content and styling.
+- Content: `title`, `content`, `body`, `button_text`, `button_url`, `src`, `alt`, `url`, `author`, `job_title`, `number`, etc.
+- Styling: `background_color`, `text_color`, `font_family`, `font_size`, `font_weight`, `text_alignment`, `padding`, `margin`, `heading_color`, `heading_font`, `heading_font_size`, `header_level`/`tag`, `button_color`, `button_bg_color`, `button_border_color`, `column_structure`.
+- New `divi/person` module definition.
+
+See [Divi 5 Simplified Settings](/builders/divi-5#divi-5-simplified-settings-v553) for the full reference with examples.
+
+**Download:** [v5.5.3 on GitHub](https://github.com/webmyc/respira-wordpress/releases/tag/v5.5.3)
+
+</Update>
+
 
 <Update label="2026-03-27" description="Respira for WordPress v5.2.0 + MCP Server v5.2.0 — Elemental" tags={["feature", "builders", "mcp", "security", "tools"]}>
 
