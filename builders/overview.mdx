@@ -1,27 +1,44 @@
 ---
 title: "Page Builder Support"
-description: "How Respira edits 11 WordPress page builders at the module level. Update buttons, text, and sections without breaking layouts."
+description: "How Respira edits 12 WordPress page builders at the module level. Update buttons, text, and sections without breaking layouts."
 ---
 
 # Page Builder Support
 
-Respira understands 11 WordPress page builders at the module level. This means AI can update specific sections, buttons, or text blocks without affecting the rest of your page.
+Respira understands 12 WordPress page builders at the module level. AI can update specific sections, buttons, or text blocks without affecting the rest of your page.
 
 ## Supported Builders
 
 | Builder | Modules | Data Format | Module Editing |
 |---------|---------|-------------|----------------|
-| [Divi](/builders/divi) | 200+ | Shortcodes | ✓ Full |
-| [Elementor](/builders/elementor) | 100+ | JSON | ✓ Full |
+| [Divi](/builders/divi) | 200+ | Shortcodes / Blocks | ✓ Full |
+| [Elementor](/builders/elementor) | 140+ | JSON | ✓ Full |
 | [Bricks](/builders/bricks) | 80+ | JSON | ✓ Full |
 | [Oxygen](/builders/oxygen) | 60+ | JSON | ✓ Full |
 | [Gutenberg](/builders/gutenberg) | All blocks | HTML comments | ✓ Full |
-| [WPBakery](/builders/wpbakery) | 50+ | Shortcodes | ✓ Full |
-| [Beaver Builder](/builders/beaver-builder) | 30+ | Serialized | ✓ Full |
+| [WPBakery](/builders/wpbakery) | 70+ | Shortcodes | ✓ Full |
+| [Beaver Builder](/builders/beaver-builder) | 27+ | Serialized | ✓ Full |
 | [Brizy](/builders/brizy) | 40+ | JSON | ✓ Full |
 | [Visual Composer](/builders/visual-composer) | 50+ | JSON | ✓ Full |
 | [Thrive Architect](/builders/thrive-architect) | 40+ | Custom | ✓ Full |
 | [Breakdance](/builders/breakdance) | 130+ | JSON | ✓ Full |
+| [Flatsome UX Builder](/builders/flatsome) | 55+ | Shortcodes | ✓ Full |
+
+### New in v6.0: Flatsome UX Builder
+
+Flatsome is the most popular WooCommerce theme on ThemeForest (200,000+ sales). Respira 6.0 adds full support:
+
+- Shortcode-based storage (section > row > col > elements), same architecture as Divi 4
+- 55 element definitions with attributes, nesting rules, and responsive patterns
+- 6 pre-built page patterns for AI agents
+- Theme-based detection (not plugin), with mixed-builder site support
+- WooCommerce shortcodes preserved through round-trip editing
+
+See the full [Flatsome documentation](/builders/flatsome) for element reference and nesting rules.
+
+### TagDiv / Newspaper detection
+
+Sites running the Newspaper or Newsmag theme with TagDiv Composer are detected as "WPBakery (TagDiv)" and handled through the WPBakery builder class.
 
 ## How It Works
 
@@ -32,23 +49,30 @@ Respira understands 11 WordPress page builders at the module level. This means A
 
 ## Key Tools
 
-- [wordpress_get_builder_info](/tools/context/get-builder-info) - Detect active builder
-- [wordpress_extract_builder_content](/tools/builders/extract-content) - View page structure
-- [wordpress_update_module](/tools/builders/update-module) - Update specific modules
-- [wordpress_inject_builder_content](/tools/builders/inject-content) - Replace structure
+- `respira_get_builder_info` — detect active builder, version, module count
+- `respira_extract_builder_content` — view full page structure
+- `respira_find_element` — search by text, CSS class, type, or ID
+- `respira_update_element` — update a single element's settings or content
+- `respira_build_page` — create a complete page from declarative JSON
+- `respira_inject_builder_content` — replace full page structure
 
 ## Example Workflow
 
 ```text
 You: "What page builder is my site using?"
-AI: Uses wordpress_get_builder_info → "Your site uses Divi Builder"
+AI: Uses respira_get_builder_info → "Your site uses Flatsome UX Builder"
 
 You: "Show me the structure of the homepage"
-AI: Uses wordpress_extract_builder_content → Shows sections, rows, modules
+AI: Uses respira_extract_builder_content → Shows sections, rows, columns, elements
 
-You: "Update the hero button text to 'Get Started'"
-AI: Uses wordpress_update_module → Updates just that button
+You: "Update the hero banner heading to 'Welcome to Our Store'"
+AI: Uses respira_find_element → Finds the text_box inside ux_banner
+AI: Uses respira_update_element → Updates just that text
 ```
+
+## Context-Aware Tool Filtering
+
+As of v6.0, the MCP server automatically filters the tool list based on your site's detected builder. A Divi site without WooCommerce sees ~130 tools instead of ~170. Less noise, faster AI responses.
 
 ## Best Practice: Use Admin Labels
 
@@ -64,20 +88,20 @@ Then: "Update the module labeled 'Hero CTA Button' to say 'Contact Us'"
 
 ### Which page builder has the best Respira support?
 
-All 11 supported builders have full module-level editing support. Divi and Elementor have the most comprehensive documentation due to their widespread use, but Respira works equally well with Bricks, Oxygen, Gutenberg, WPBakery, Beaver Builder, Brizy, Visual Composer, Thrive Architect, and Breakdance.
+All 12 supported builders have full module-level editing support. Divi and Elementor have the most comprehensive intelligence packages. Bricks has 20 dedicated deep tools. Flatsome has a 55-element intelligence package with nesting rules and page patterns.
 
 ### Can Respira edit Global Modules in Divi?
 
-Yes. Respira detects Divi Global Modules and can update them. Changes to global modules propagate everywhere they're used on your site. Use "List all global modules" to see your global module library, then target specific ones by name.
+Yes. Respira detects Divi Global Modules and can update them. Changes to global modules propagate everywhere they are used on your site.
 
 ### Does Respira work with custom builder modules?
 
-Core modules from all 11 builders are fully supported. Third-party add-on modules (like Ultimate Addons for Elementor or Divi Supreme) have varying support depending on how they store data. Most text-based custom modules work well; complex interactive modules may need manual editing.
+Core modules from all 12 builders are fully supported. Third-party add-on modules have varying support depending on how they store data. Most text-based custom modules work well.
 
 ### What happens to my styling when Respira updates a module?
 
-Respira preserves all existing styling, settings, and structure. Only the specific content you ask to change (text, links, images) is modified. Colors, fonts, spacing, animations, and responsive settings remain intact.
+Respira preserves all existing styling, settings, and structure. Only the specific content you ask to change is modified. Colors, fonts, spacing, animations, and responsive settings remain intact.
 
 ### Can I undo changes made by Respira?
 
-Yes. Respira's duplicate-first workflow means changes are made to copies, not originals. You review and approve changes in WordPress Admin (Respira → Approve Edits) before they replace the original. If you've already approved, use WordPress revisions or your backup solution.
+Yes. Every write operation creates a before/after snapshot. Use the Changes page in WordPress admin to review, diff, and restore any previous state.
