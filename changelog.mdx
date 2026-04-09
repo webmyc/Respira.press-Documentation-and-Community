@@ -8,6 +8,46 @@ description: "Official changelog and release notes for Respira for WordPress plu
 This page is the official changelog and download hub for both Respira for WordPress and the MCP server. You can use it to review version history, check release notes before upgrading, and download the latest stable builds.
 
 ## WordPress Plugin Releases
+
+<Update label="2026-04-09" description="Respira for WordPress v6.0.0 + WooCommerce Add-on v2.0.0 + MCP Server v6.0.0 — Storefront" tags={["feature", "builders", "woocommerce", "mcp", "commerce"]}>
+
+### What's New in 6.0.0 "Storefront"
+
+Three coordinated releases. Twelve builders. Real commerce. One layer.
+
+**Flatsome UX Builder — Builder #12**
+- Full support for the most popular WooCommerce theme on ThemeForest (200K+ sales)
+- 55 element definitions with attributes, nesting rules, and responsive patterns
+- Shared ShortcodeParser utility for Divi 4 and Flatsome with strict tag allowlists
+- Theme-based detection, mixed-builder site support, snapshots on every write
+
+**15 New WooCommerce Commerce Tools (36 total)**
+- Storefront design intelligence: `analyze_shop_page`, `analyze_product_page`, `update_product_card_layout`, `add_low_stock_badge`, `add_sale_badge`, `update_checkout_layout`
+- Catalog operations: `list_products_advanced`, `bulk_update_products`, `analyze_catalog_health`, `find_product_by_natural_language`
+- Pricing: `bulk_update_prices` (with dry-run), `schedule_sale`, `revert_pricing`
+- Inventory: `bulk_update_stock`, `find_low_stock`
+- All write tools create snapshots. 100-product hard cap on bulk operations.
+
+**Bundled WooCommerce Entitlement**
+- Studio and Founder plans now include the WooCommerce add-on at no extra cost
+- Maker and Builder continue to purchase separately at €95/year
+
+**Context-Aware MCP Tool Filtering (MCP Server v6.0.0)**
+- Tools automatically filtered by detected builder and active plugins
+- ~170 tools reduced to ~130 on typical sites
+- Fail-open: full list returned if detection fails
+- Cached with 1-minute TTL, invalidated on site switch
+
+**Bug Fixes**
+- Metrics undercounting: missing `direct_edit_page`, `direct_edit_post`, `create_custom_post`, `update_custom_post`, `force_edit_custom_post` actions
+- Founder plan capacity: shows Unlimited instead of 999
+- TagDiv/Newspaper detection: routes to WPBakery (TagDiv) instead of Gutenberg
+- WooCommerce snapshot gap: all existing write tools now create before/after snapshots
+
+**Download:** [v6.0.0 on GitHub](https://github.com/webmyc/respira-wordpress/releases/tag/v6.0.0) | [WooCommerce Add-on v2.0.0](https://github.com/webmyc/respira-wordpress/releases/tag/woo-v2.0.0) | [Release notes](https://www.respira.press/releases/6.0.0)
+
+</Update>
+
 <Update label="2026-04-06" description="Respira for WordPress v5.5.3 — Divi 5 Revision Fix + Settings Schema" tags={["fix", "builders", "divi"]}>
 
 ### What's New in 5.5.3
@@ -213,7 +253,7 @@ Download: [respira-for-wordpress-1.9.1.zip](https://respira.press/releases)
 - Safe editing with automatic page duplication
 - No SSH required, works with any WordPress hosting
 - Built-in security validation for XSS and SQL injection
-- Support for 11 page builders: Gutenberg, Divi, Elementor, WPBakery, Oxygen, Bricks, Beaver Builder, Brizy, Visual Composer, Thrive Architect, Breakdance
+- Support for 12 page builders: Gutenberg, Divi, Elementor, WPBakery, Oxygen, Bricks, Beaver Builder, Brizy, Visual Composer, Thrive Architect, Breakdance
 - Full menu management with hierarchy
 - Taxonomy management (categories, tags, custom)
 - User and comment management
@@ -422,18 +462,3 @@ For detailed setup, see the [Installation guide](/installation).
 - [Configuration](/configuration)
 - [Usage Guide](/usage)
 
-## 6.0.0 — Storefront (April 9, 2026)
-
-### Added
-- **Flatsome UX Builder as Builder #12** — full extract/inject, element ops, build_page, snapshots for the most popular WooCommerce theme (200K+ ThemeForest sales)
-- **Flatsome Intelligence** — 55 element definitions, 6 page patterns, nesting rules, responsive attributes
-- **ShortcodeParser utility** — shared parser for Divi 4 and Flatsome with strict tag allowlists
-- **15 new WooCommerce Commerce tools** — storefront design intelligence, bulk pricing, catalog health, natural language search, low-stock detection, sale scheduling
-- **Bundled WooCommerce entitlement** — Studio and Founder plans include WooCommerce add-on free
-- **Context-aware tool filtering (MCP v6.0)** — tools filtered by detected builder and active plugins (~170 → ~130 on typical sites)
-- **WooCommerce snapshot safety** — all write tools now create before/after snapshots
-
-### Fixed
-- Metrics undercounting for custom post edits and direct edit paths
-- Founder plan capacity showing 999 instead of Unlimited
-- TagDiv/Newspaper theme detection routing to Gutenberg instead of WPBakery
