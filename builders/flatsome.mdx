@@ -1,0 +1,115 @@
+---
+title: 'Flatsome UX Builder'
+description: 'AI-assisted editing for Flatsome, the most popular WooCommerce theme on ThemeForest.'
+---
+
+# Flatsome UX Builder
+
+Flatsome is the #1 WooCommerce theme on ThemeForest with 200,000+ sales. Its editor, UX Builder, stores content as WordPress shortcodes in `post_content`. Respira 6.0 adds full support for Flatsome as Builder #12.
+
+## How it works
+
+Flatsome uses standard WordPress shortcodes with a `section > row > col > elements` hierarchy, similar to Divi 4. Respira's shared ShortcodeParser handles both Divi 4 and Flatsome with strict tag allowlists to prevent cross-builder confusion.
+
+### Detection
+
+Respira detects Flatsome by checking the active WordPress theme (not plugin). If the Flatsome theme is active and the page contains Flatsome shortcodes like `[ux_banner]`, `[text_box]`, or `[ux_products]`, the Flatsome builder class handles it.
+
+On mixed-builder sites (e.g., Flatsome theme + Elementor plugin), each page is detected independently. Elementor pages are handled by Elementor, Flatsome pages by Flatsome.
+
+### Shortcode structure
+
+```
+[section bg_color="#1a1a2e" padding="60px"]
+  [row]
+    [col span="6"]
+      [ux_banner height="400px" bg="hero.jpg"]
+        [text_box text_color="light" width="60" position_x="50" position_y="50"]
+          <h1>Welcome</h1>
+          <p>Your content here</p>
+        [/text_box]
+      [/ux_banner]
+    [/col]
+    [col span="6"]
+      [featured_box img_width="60" pos="top" title="Feature"]
+        Description text
+      [/featured_box]
+    [/col]
+  [/row]
+[/section]
+```
+
+## Supported operations
+
+| Operation | Status |
+|-----------|--------|
+| Extract content | Supported |
+| Inject content | Supported |
+| Element-level editing (find, update, move, duplicate, remove) | Supported |
+| build_page | Supported |
+| Snapshots | Supported |
+| WooCommerce shortcode preservation | Supported |
+| Mixed-builder detection | Supported |
+| Runtime schema validation | Planned (v6.1) |
+| HTML-to-Flatsome conversion | Not available |
+
+## Intelligence
+
+Respira includes a Flatsome Intelligence package with:
+
+- **55 element definitions** with attributes, types, defaults, and nesting rules
+- **6 page patterns** for AI agents (hero banner, three-column features, product grid, testimonials, CTA, pricing table)
+- **Responsive attribute support** (`span__sm`, `span__md`, `height__sm`, etc.)
+
+## Key elements
+
+### Layout
+- `section` — top-level container (bg, padding, margin, visibility, parallax, video)
+- `row` — row inside section (style, width, v_align, h_align)
+- `col` — column inside row (span 1-12, responsive, animate, parallax)
+
+### Content
+- `ux_banner` — hero banner with background image/video
+- `text_box` — text content inside banners (position_x, position_y, width)
+- `button` — CTA button (color, style, size, link)
+- `title` — heading element
+- `featured_box` — icon/image with title and description
+- `ux_image` — responsive image with lightbox
+- `ux_gallery` — image gallery (grid/slider/masonry)
+- `testimonial` — customer testimonial card
+- `team_member` — team member profile
+- `accordion` / `tabgroup` — collapsible/tabbed content
+
+### Shop (WooCommerce)
+- `ux_products` — product grid (columns, category filter, orderby)
+- `product_categories` — category grid
+- `ux_product_flip` — product card with flip animation
+- `sale_countdown` — sale countdown timer
+
+## Common attributes
+
+| Attribute | Type | Description |
+|-----------|------|-------------|
+| `span` | 1-12 | Column width. Responsive: `span__sm`, `span__md` |
+| `padding` | dimension | Padding. Responsive: `padding__sm`, `padding__md` |
+| `bg` | image URL | Background image |
+| `bg_color` | color | Background color (hex or rgba) |
+| `animate` | select | CSS animation (fadeInUp, bounceIn, etc.) |
+| `visibility` | select | Responsive visibility (hidden-sm, show-for-medium, etc.) |
+| `depth` | 0-5 | Box shadow depth |
+| `parallax` | -10 to 10 | Parallax scroll effect |
+| `class` | text | Custom CSS class |
+
+## Nesting rules
+
+- `section` can contain any element
+- `row` can only contain `col`
+- `col` can contain any content element
+- `ux_banner` can contain `text_box` and `ux_image`
+- `text_box` requires `ux_banner` as parent
+- `accordion` can only contain `accordion-item`
+- `tabgroup` can only contain `tab`
+
+## Auto-wrapping
+
+When using `build_page`, bare elements (not wrapped in section > row > col) are automatically wrapped in a full container hierarchy. You can pass a flat list of elements and Respira will create the correct structure.

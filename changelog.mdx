@@ -421,3 +421,19 @@ For detailed setup, see the [Installation guide](/installation).
 - [Installation](/installation)
 - [Configuration](/configuration)
 - [Usage Guide](/usage)
+
+## 6.0.0 — Storefront (April 9, 2026)
+
+### Added
+- **Flatsome UX Builder as Builder #12** — full extract/inject, element ops, build_page, snapshots for the most popular WooCommerce theme (200K+ ThemeForest sales)
+- **Flatsome Intelligence** — 55 element definitions, 6 page patterns, nesting rules, responsive attributes
+- **ShortcodeParser utility** — shared parser for Divi 4 and Flatsome with strict tag allowlists
+- **15 new WooCommerce Commerce tools** — storefront design intelligence, bulk pricing, catalog health, natural language search, low-stock detection, sale scheduling
+- **Bundled WooCommerce entitlement** — Studio and Founder plans include WooCommerce add-on free
+- **Context-aware tool filtering (MCP v6.0)** — tools filtered by detected builder and active plugins (~170 → ~130 on typical sites)
+- **WooCommerce snapshot safety** — all write tools now create before/after snapshots
+
+### Fixed
+- Metrics undercounting for custom post edits and direct edit paths
+- Founder plan capacity showing 999 instead of Unlimited
+- TagDiv/Newspaper theme detection routing to Gutenberg instead of WPBakery
