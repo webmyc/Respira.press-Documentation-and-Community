@@ -7,6 +7,49 @@ description: "Official changelog and release notes for Respira for WordPress plu
 
 This page is the official changelog and download hub for both Respira for WordPress and the MCP server. You can use it to review version history, check release notes before upgrading, and download the latest stable builds.
 
+## Respira CLI Releases
+
+<Update label="2026-04-19" description="Respira CLI for WordPress v0.1.0: initial release" tags={["feature", "cli", "sdk", "ai-agents"]}>
+
+### What's New in Respira CLI v0.1.0
+
+The modern WordPress command line for developers working with AI coding agents.
+
+**Three npm packages**
+- `@respira/cli`: the oclif-based CLI with 29 commands across auth, sites, read, write, find-element, tools, docs, snapshots, exec, init-claude-code
+- `@respira/sdk`: the typed TypeScript client with zod validation on every method
+- `@respira/cli-core`: shared auth store (OS keychain with file fallback), output formatter, and API client with retry plus rate-limit handling
+
+**Anonymous mode**
+- `respira read structure <url>` works on any public WordPress site with no account
+- `respira read design-system <url>` returns colors, fonts, and spacing from any public site
+
+**Builder-native**
+- Elementor, Divi (4 and 5), Bricks, WPBakery, Beaver Builder, Oxygen, Breakdance, Brizy, Thrive Architect, Flatsome UX Builder, native Gutenberg blocks, plus WooCommerce
+
+**Safety-first**
+- Every write creates a snapshot first
+- `--dry-run` on every write command
+- `--diff` on `write edit-page` and `write edit-element` emits before/after for agent review
+- Destructive operations require `--confirm`
+
+**AI agent integrations**
+- `respira init-claude-code` sets up Claude Code in the current directory with a skill + shortcut commands
+- JSON output when piped, so every agent framework can consume results
+
+**Installation**
+```bash
+npm install -g @respira/cli
+respira auth login
+respira sites list
+```
+
+Documentation: [/cli/introduction](/cli/introduction). Source: [github.com/respira-press/respira-wordpress-cli](https://github.com/respira-press/respira-wordpress-cli).
+
+Not a WP-CLI replacement. WP-CLI is excellent for server-side WordPress administration and the two tools are complementary.
+
+</Update>
+
 ## WordPress Plugin Releases
 
 <Update label="2026-04-09" description="Respira for WordPress v6.0.0 + WooCommerce Add-on v2.0.0 + MCP Server v6.0.0 — Storefront" tags={["feature", "builders", "woocommerce", "mcp", "commerce"]}>
