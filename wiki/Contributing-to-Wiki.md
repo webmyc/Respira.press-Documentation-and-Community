@@ -97,7 +97,7 @@ Or [[Prompt-Recipes]] (wiki-style)
 **External links:**
 ```markdown
 [Official docs](https://respira.press/docs)
-[GitHub Discussion](https://github.com/webmyc/community/discussions)
+[GitHub Discussion](https://github.com/respira-press/Respira.press-Documentation-and-Community/discussions)
 ```
 
 **Link to official docs when possible** (don't duplicate them)
@@ -174,13 +174,13 @@ If you find something that no longer works (software updated, better method foun
 ## Need Help?
 
 **Not sure if your contribution fits?**
-Ask in [Discussions Community Meta](https://github.com/webmyc/community/discussions/categories/community-meta)
+Ask in [Discussions Community Meta](https://github.com/respira-press/Respira.press-Documentation-and-Community/discussions/categories/community-meta)
 
 **Technical issues with wiki editing?**
-Ask in [Discussions Q&A](https://github.com/webmyc/community/discussions/categories/q-a)
+Ask in [Discussions Q&A](https://github.com/respira-press/Respira.press-Documentation-and-Community/discussions/categories/q-a)
 
 **Found a wiki bug?**
-Report in [GitHub Issues](https://github.com/webmyc/community/issues)
+Report in [GitHub Issues](https://github.com/respira-press/Respira.press-Documentation-and-Community/issues)
 
 ## Recognition
 

@@ -142,7 +142,7 @@ Expected output:
 - [Official docs for Tool]
 - [Official docs for Respira](https://respira.press)
 - [Related wiki page]
-- [Relevant discussion](https://github.com/webmyc/community/discussions)
+- [Relevant discussion](https://github.com/respira-press/Respira.press-Documentation-and-Community/discussions)
 
 ## Contributors
 

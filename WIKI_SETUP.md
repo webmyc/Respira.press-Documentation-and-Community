@@ -5,7 +5,7 @@ One-time setup for the Respira Community Wiki.
 ## Pre-Launch
 
 - [ ] Enable wiki: Settings → General → Features → check **Wikis**
-- [ ] Clone wiki repo: `git clone https://github.com/webmyc/community.wiki.git`
+- [ ] Clone wiki repo: `git clone https://github.com/respira-press/Respira.press-Documentation-and-Community.wiki.git`
 - [ ] Copy contents from `wiki/` directory to wiki repo root
 - [ ] Rename `Home.md` to `Home.md` (GitHub wiki uses Home as front page)
 - [ ] Push: `git add . && git commit -m "chore: initial wiki pages" && git push`
@@ -13,7 +13,7 @@ One-time setup for the Respira Community Wiki.
 
 ## Go Live
 
-- [ ] Verify [Wiki](https://github.com/webmyc/community/wiki) displays correctly
+- [ ] Verify [Wiki](https://github.com/respira-press/Respira.press-Documentation-and-Community/wiki) displays correctly
 - [ ] Test edit workflow (Edit → change → Save)
 - [ ] Create [Announcement discussion](#announcement-draft) (see below)
 - [ ] Pin announcement in Discussions
@@ -29,7 +29,7 @@ One-time setup for the Respira Community Wiki.
 
 The `wiki/` folder in this repo is the source of truth. To update the live wiki:
 
-1. Clone wiki: `git clone https://github.com/webmyc/community.wiki.git community-wiki`
+1. Clone wiki: `git clone https://github.com/respira-press/Respira.press-Documentation-and-Community.wiki.git community-wiki`
 2. Copy: `cp wiki/*.md community-wiki/`
 3. In community-wiki: `git add . && git status`
 4. Commit and push changes

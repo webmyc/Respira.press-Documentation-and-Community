@@ -118,8 +118,8 @@ If you solved a problem, write it up. If you found a better prompt, share it. If
 
 Wiki not enough? Try these:
 
-- **Question:** [Respira for WordPress GitHub Community — Discussions](https://github.com/webmyc/community/discussions)
-- **Bug:** [GitHub Issues](https://github.com/webmyc/community/issues)
+- **Question:** [Respira for WordPress GitHub Community — Discussions](https://github.com/respira-press/Respira.press-Documentation-and-Community/discussions)
+- **Bug:** [GitHub Issues](https://github.com/respira-press/Respira.press-Documentation-and-Community/issues)
 - **Quick help:** [Discord](https://go.respira.cafe/respira-discord)
 - **Official docs:** [respira.press](https://respira.press)
 

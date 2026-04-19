@@ -76,7 +76,7 @@ npm run publish:discussions
 Or with explicit repo:
 
 ```bash
-REPO=webmyc/community node scripts/publish-discussions.mjs
+REPO=respira-press/Respira.press-Documentation-and-Community node scripts/publish-discussions.mjs
 ```
 
 ### Pin discussions
@@ -92,7 +92,7 @@ REPO=webmyc/community node scripts/publish-discussions.mjs
 1. Go to repo **Settings** → **General**
 2. Scroll to **Features**
 3. Check **Wikis**
-4. Clone wiki repo: `git clone https://github.com/webmyc/community.wiki.git`
+4. Clone wiki repo: `git clone https://github.com/respira-press/Respira.press-Documentation-and-Community.wiki.git`
 5. Copy `wiki/*.md` into wiki repo root, then commit and push
 6. See [WIKI_SETUP.md](./WIKI_SETUP.md) for full checklist
 
@@ -110,13 +110,13 @@ REPO=webmyc/community node scripts/publish-discussions.mjs
 - [ ] Enable Wiki and push initial pages (see WIKI_SETUP.md)
 - [ ] Publish "Community Wiki is live" discussion (draft: 14-wiki-launch.md)
 - [ ] Update Documentation.ai (if it points to repo URL)
-- [ ] Update external links (respira.press, product site) that point to `github.com/webmyc/respira-docs`
+- [ ] Update external links (respira.press, product site) that point to `github.com/respira-press/Respira.press-Documentation-and-Community`
 
 ---
 
 ## 4. Post-rename verification
 
-- [ ] `https://github.com/webmyc/community` loads
+- [ ] `https://github.com/respira-press/Respira.press-Documentation-and-Community` loads
 - [ ] Discussions tab visible
 - [ ] docs.respira.press still works (Documentation.ai may need repo re-link)
-- [ ] Redirect: `github.com/webmyc/respira-docs` → `github.com/webmyc/community` (GitHub provides this automatically for a while)
+- [ ] Redirect: `github.com/respira-press/Respira.press-Documentation-and-Community` → `github.com/respira-press/Respira.press-Documentation-and-Community` (GitHub provides this automatically for a while)

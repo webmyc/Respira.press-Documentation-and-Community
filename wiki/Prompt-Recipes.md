@@ -382,4 +382,4 @@ Share a prompt that worked? Add it here:
 
 ---
 
-**Got a recipe to share?** Edit this page or post in [Discussions](https://github.com/webmyc/community/discussions).
+**Got a recipe to share?** Edit this page or post in [Discussions](https://github.com/respira-press/Respira.press-Documentation-and-Community/discussions).

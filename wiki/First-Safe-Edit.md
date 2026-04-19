@@ -146,8 +146,8 @@ You did it! Now try:
 
 First edit successful? Post in:
 - [Discord #wins](https://go.respira.cafe/respira-discord)
-- [Discussions Showcase](https://github.com/webmyc/community/discussions/categories/showcase)
+- [Discussions Showcase](https://github.com/respira-press/Respira.press-Documentation-and-Community/discussions/categories/showcase)
 
 ---
 
-**Got stuck?** Ask in [Discussions Q&A](https://github.com/webmyc/community/discussions/categories/q-a).
+**Got stuck?** Ask in [Discussions Q&A](https://github.com/respira-press/Respira.press-Documentation-and-Community/discussions/categories/q-a).

@@ -24,7 +24,7 @@ After running `gh repo rename community`, make these updates in a follow-up PR:
 
 ## Validation after rename
 
-- [ ] Clone repo fresh: `git clone git@github.com:webmyc/community.git`
+- [ ] Clone repo fresh: `git clone git@github.com:respira-press/Respira.press-Documentation-and-Community.git`
 - [ ] Docs build successfully
 - [ ] "Edit this page" links work
 - [ ] Issue template contact links work

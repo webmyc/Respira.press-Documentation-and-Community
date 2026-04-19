@@ -125,12 +125,12 @@
 
 - [Link to relevant wiki page]
 - [Link to official docs](https://respira.press)
-- [Link to discussion if applicable](https://github.com/webmyc/community/discussions)
+- [Link to discussion if applicable](https://github.com/respira-press/Respira.press-Documentation-and-Community/discussions)
 
 ## Questions?
 
 If you're trying something similar and get stuck, ask in:
-- [GitHub Discussions](https://github.com/webmyc/community/discussions)
+- [GitHub Discussions](https://github.com/respira-press/Respira.press-Documentation-and-Community/discussions)
 - [Discord](https://go.respira.cafe/respira-discord)
 
 ## About the Author
@@ -139,4 +139,4 @@ If you're trying something similar and get stuck, ask in:
 
 ---
 
-**Tried this workflow?** Share your results in [Discussions](https://github.com/webmyc/community/discussions).
+**Tried this workflow?** Share your results in [Discussions](https://github.com/respira-press/Respira.press-Documentation-and-Community/discussions).

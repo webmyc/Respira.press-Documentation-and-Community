@@ -21,19 +21,19 @@ A community-maintained knowledge base for:
 
 ## How to contribute
 
-1. Go to the [Wiki](https://github.com/webmyc/community/wiki)
+1. Go to the [Wiki](https://github.com/respira-press/Respira.press-Documentation-and-Community/wiki)
 2. Find a page that needs improvement (or create one)
 3. Click **Edit**
 4. Make your changes
 5. Save with an edit summary
 
-**Guidelines:** Test before posting. Redact secrets. Use the [templates](https://github.com/webmyc/community/wiki/Contributing-to-Wiki).
+**Guidelines:** Test before posting. Redact secrets. Use the [templates](https://github.com/respira-press/Respira.press-Documentation-and-Community/wiki/Contributing-to-Wiki).
 
 ## Start here
 
-- [First Safe Edit](https://github.com/webmyc/community/wiki/First-Safe-Edit) – 15-minute walkthrough
-- [Prompt Recipes](https://github.com/webmyc/community/wiki/Prompt-Recipes) – tested prompts for common tasks
-- [Contributing to the Wiki](https://github.com/webmyc/community/wiki/Contributing-to-Wiki) – how to add content
+- [First Safe Edit](https://github.com/respira-press/Respira.press-Documentation-and-Community/wiki/First-Safe-Edit) – 15-minute walkthrough
+- [Prompt Recipes](https://github.com/respira-press/Respira.press-Documentation-and-Community/wiki/Prompt-Recipes) – tested prompts for common tasks
+- [Contributing to the Wiki](https://github.com/respira-press/Respira.press-Documentation-and-Community/wiki/Contributing-to-Wiki) – how to add content
 
 **Give more than you receive.** If you learned something the hard way, document it so others don't have to.
 

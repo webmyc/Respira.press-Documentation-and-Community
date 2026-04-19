@@ -62,7 +62,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 **Respira for WordPress GitHub Community — Wiki:** prompts, troubleshooting, integrations.
 
-- [Wiki Home](https://github.com/webmyc/community/wiki) (when enabled)
+- [Wiki Home](https://github.com/respira-press/Respira.press-Documentation-and-Community/wiki) (when enabled)
 - Wiki source: [wiki/](./wiki) in this repo
 - [Contributing to the Wiki](./wiki/Contributing-to-Wiki.md)
 
