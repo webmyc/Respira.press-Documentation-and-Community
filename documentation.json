@@ -636,6 +636,17 @@
             ]
           },
           {
+            "group": "ACF (Advanced Custom Fields)",
+            "icon": "database",
+            "pages": [
+              {
+                "title": "ACF tools overview",
+                "path": "tools/acf/overview",
+                "icon": "book-open"
+              }
+            ]
+          },
+          {
             "group": "Other Tools",
             "icon": "shield",
             "pages": [

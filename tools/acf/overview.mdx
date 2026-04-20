@@ -1,0 +1,172 @@
+---
+title: "ACF tools overview"
+description: "54 Respira tools for Advanced Custom Fields covering field reads and writes, field group management, ACF Pro repeaters, flexible content, galleries, options pages, relationships, and bulk operations."
+---
+
+# Advanced Custom Fields tools
+
+Advanced Custom Fields (ACF) powers flexible content models across approximately 2 million WordPress sites. Respira v6.6.0 ships **54 ACF tools** under the `respira_acf_*` namespace. Every write tool is snapshot-backed, dry-run previewable, and license-tier gated.
+
+## Prerequisites
+
+Respira auto-detects ACF at plugin init. You need one of:
+
+- **[Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/)** (free) — enables 28 tools: field ops, relationships, user/term fields, bulk operations.
+- **Advanced Custom Fields Pro** — enables all 54 tools. Adds repeaters, flexible content, galleries, options pages.
+
+On sites without ACF, zero ACF tools register. Agents see a clean tool list with no "ACF tool but ACF not installed" confusion.
+
+## License tiers
+
+- **Lite** — All ACF reads (get_field, list_field_groups, search_fields, compare_fields, etc.).
+- **Maker** — All reads plus single-post writes (update_field, update_fields, delete_field, repeater row ops, gallery edits).
+- **Builder** — Everything on Maker plus bulk operations (`acf_clone_fields`, `acf_bulk_update_fields` up to 500 posts).
+- **Studio** — Everything on Builder plus higher quotas.
+
+## Field operations (18 tools)
+
+Read, write, validate, and manage ACF field values and field groups.
+
+| Tool | Description |
+|---|---|
+| `respira_acf_get_field` | Read a single ACF field value from a post. |
+| `respira_acf_get_fields` | Read every ACF field value attached to a post. |
+| `respira_acf_update_field` | Update a single ACF field (snapshotted, supports `dry_run`). |
+| `respira_acf_update_fields` | Bulk-update multiple fields on a single post in one snapshot. |
+| `respira_acf_delete_field` | Remove a stored field value. Field definition stays intact. |
+| `respira_acf_list_field_groups` | List every registered field group. |
+| `respira_acf_get_field_group` | Fetch a field group with all its field definitions. |
+| `respira_acf_create_field_group` | Register a new field group at runtime. |
+| `respira_acf_update_field_group` | Update a field group's configuration. |
+| `respira_acf_delete_field_group` | Remove a field group definition. |
+| `respira_acf_export_field_group` | Export a field group as JSON. |
+| `respira_acf_import_field_group` | Import a field group from JSON. |
+| `respira_acf_clone_field_group` | Duplicate a field group under a new name. |
+| `respira_acf_validate_field` | Validate a value against a field definition without writing. |
+| `respira_acf_get_field_object` | Fetch the full field definition. |
+| `respira_acf_search_fields` | Full-text search across all ACF field definitions. |
+| `respira_acf_bulk_get_fields` | Read the same field keys from up to 500 posts in one call. |
+| `respira_acf_compare_fields` | Diff ACF field values between two posts. |
+
+## ACF Pro: Repeaters, flexible content, galleries (18 tools)
+
+Row-level and layout-level ops for ACF Pro's composable field types. Returns `PRO_FEATURE_REQUIRED` on free ACF installs.
+
+| Tool | Description |
+|---|---|
+| `respira_acf_get_repeater` | Get every row from a repeater field. |
+| `respira_acf_get_repeater_row` | Get a single row by zero-based index. |
+| `respira_acf_add_repeater_row` | Append a row. |
+| `respira_acf_update_repeater_row` | Update values on a specific row. |
+| `respira_acf_delete_repeater_row` | Remove a row. |
+| `respira_acf_reorder_repeater` | Reorder rows by providing new_order list. |
+| `respira_acf_count_repeater_rows` | Count stored rows. |
+| `respira_acf_get_flexible_content` | Get every layout from a flexible content field. |
+| `respira_acf_get_flexible_layout` | Get a single layout by index. |
+| `respira_acf_add_flexible_layout` | Append a new layout of the given type. |
+| `respira_acf_update_flexible_layout` | Update a layout's values. |
+| `respira_acf_delete_flexible_layout` | Remove a layout. |
+| `respira_acf_reorder_flexible_layouts` | Reorder layouts. |
+| `respira_acf_get_gallery` | List images in a gallery field. |
+| `respira_acf_update_gallery` | Replace the gallery with a new attachment ID array. |
+| `respira_acf_add_to_gallery` | Append a single image. |
+| `respira_acf_remove_from_gallery` | Remove a single image. |
+| `respira_acf_reorder_gallery` | Reorder gallery images. |
+
+## ACF Pro: Options pages (8 tools)
+
+Site-wide settings stored on ACF options pages. ACF Pro only.
+
+| Tool | Description |
+|---|---|
+| `respira_acf_list_options_pages` | List every registered options page. |
+| `respira_acf_get_option` | Read a single option value. |
+| `respira_acf_get_options` | Read every option on a page. |
+| `respira_acf_update_option` | Update a single option. |
+| `respira_acf_update_options` | Bulk-update multiple options. |
+| `respira_acf_delete_option` | Remove an option value. |
+| `respira_acf_create_options_page` | Register a new options page at runtime. |
+| `respira_acf_export_options` | Export every option value as JSON. |
+
+## Relationships & post objects (6 tools)
+
+| Tool | Description |
+|---|---|
+| `respira_acf_get_relationship` | Read related post IDs from a relationship field. |
+| `respira_acf_update_relationship` | Set the related post IDs (replaces existing). |
+| `respira_acf_get_reverse_relationships` | Find every post that references the given post through any ACF field. |
+| `respira_acf_get_post_object` | Read a post object field as normalized `{ID, post_title, post_type}`. |
+| `respira_acf_get_user_field` | Read an ACF field attached to a user profile. |
+| `respira_acf_update_user_field` | Update an ACF field on a user profile. |
+
+## Terms & bulk (4 tools)
+
+| Tool | Description |
+|---|---|
+| `respira_acf_get_term_field` | Read an ACF field from a taxonomy term. |
+| `respira_acf_update_term_field` | Update an ACF field on a taxonomy term. |
+| `respira_acf_clone_fields` | Copy selected ACF fields from one post to another. Builder tier required. |
+| `respira_acf_bulk_update_fields` | Apply the same field updates to up to 500 posts in one call. Builder tier required. |
+
+## Safety model
+
+Every ACF write:
+
+- **Captures a snapshot before and after** via `Respira_Snapshots::capture_snapshot()`. Roll back with `respira_restore_snapshot`.
+- **Supports `dry_run: true`** to preview the change without touching the database.
+- **Writes to the audit log** (`wp_respira_audit_log`) with action, resource type, resource ID, timestamp.
+- **Enforces scope gating** in the PHP handler: `write` scope for single-post writes, `write_bulk` scope for bulk operations.
+
+## Example workflows
+
+### Update a product spec sheet across 100 products
+
+```javascript
+const products = await respira.read.posts('mysite.com', { type: 'product', search: 'pattern' })
+const ids = products.map(p => p.id)
+
+await respira_acf_bulk_update_fields({
+  post_ids: ids,
+  fields: { warranty_months: 24, country_of_origin: 'Portugal' }
+})
+// Each product gets its own before/after snapshot.
+```
+
+### Migrate a field group from staging to production
+
+```javascript
+// On staging
+const group = await respira_acf_export_field_group({ group_key: 'group_hero' })
+
+// On production
+await respira_acf_import_field_group({ json: group })
+
+// Verify
+await respira_acf_compare_fields({
+  post_id_a: 123,
+  post_id_b: 456,
+  field_keys: ['hero_title', 'hero_subtitle']
+})
+```
+
+## Error codes
+
+| Code | Meaning |
+|---|---|
+| `ACF_NOT_ACTIVE` | ACF is not installed on the target site. |
+| `respira_acf_pro_required` | A Pro-only tool was called on a free ACF install. |
+| `respira_acf_write_scope_required` | The API key lacks the `write` scope (Maker+ plan required). |
+| `respira_acf_bulk_scope_required` | The API key lacks the `write_bulk` scope (Builder+ plan required). |
+| `respira_acf_field_not_found` | The field key does not resolve. Use `list_field_groups` or `search_fields` to enumerate. |
+| `respira_acf_post_not_found` | The target post does not exist. |
+| `respira_acf_term_not_found` | The target taxonomy term does not exist. |
+| `respira_acf_user_not_found` | The target user does not exist. |
+| `respira_acf_invalid_input` | Required parameters are missing or malformed. |
+| `respira_acf_too_many` | Bulk operations are capped at 500 posts per call. |
+
+## Related
+
+- [Release notes for v6.6.0](https://respira.press/releases/6.6.0)
+- [Announcement blog post](https://respira.press/blog/acf-54-tools-v6-6)
+- [Full tools catalog](https://respira.press/tools#acf)
+- [CLI builder docs](https://respira.press/cli/docs/builders/acf)
