@@ -657,17 +657,6 @@
             ]
           },
           {
-            "group": "ACF (Advanced Custom Fields)",
-            "icon": "database",
-            "pages": [
-              {
-                "title": "ACF tools overview",
-                "path": "tools/acf/overview",
-                "icon": "book-open"
-              }
-            ]
-          },
-          {
             "group": "Other Tools",
             "icon": "shield",
             "pages": [
@@ -972,17 +961,6 @@
             "icon": "terminal"
           }
         ]
-      },
-      {
-        "tab": "Changelog",
-        "icon": "clock",
-        "pages": [
-          {
-            "title": "Release History",
-            "path": "changelog",
-            "icon": "history"
-          }
-        ]
       }
     ]
   },
@@ -993,6 +971,10 @@
         "link": "https://www.respira.press/releases"
       },
       "links": [
+        {
+          "title": "Changelog",
+          "link": "https://www.respira.press/releases"
+        },
         {
           "title": "GitHub Community",
           "link": "https://github.com/respira-press/Respira.press-Documentation-and-Community"
