@@ -57,6 +57,17 @@ This is deliberate and worth stating plainly: `approve_duplicate`, `reject_dupli
 
 So an assistant cannot talk itself into publishing. The approval step needs a person in WordPress, which is the whole point of the design.
 
+## Share preview links (8.7.5+)
+
+The person whose yes matters often has no WordPress login: a client, a colleague, an outside reviewer. Since plugin 8.7.5, every staged duplicate returns a share preview link alongside the write, and the response message repeats it so assistants quote the right URL.
+
+- The link renders that one draft, to anyone who has it, with no login and no account. It grants nothing else.
+- It expires after 14 days by default (the `respira_preview_share_ttl_days` option tunes it per site).
+- Rejecting the staged change trashes the duplicate, which also kills the link immediately. Approving publishes the change, so the link has done its job.
+- The token is signed with the site's own salt and nothing is stored: there is no list of share links to manage or leak.
+
+The plain page URL (`?page_id=...`) stays login-gated while the post is a draft. If someone reports a preview link "not working," check they were sent the share link from the response, not the page URL.
+
 ## When a write goes live directly
 
 Staging is the default, not the only path. Some writes go straight to the live object, and Respira says which before it does.

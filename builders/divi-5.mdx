@@ -35,6 +35,22 @@ Older builds could produce an "Unknown Module" error when the agent invented lay
 
 ---
 
+## New in 8.8: Divi's styling engine, presets, and the Library
+
+Plugin 8.8.0 and 8.8.1 (with MCP server 8.3.16 and 8.3.17) came out of a customer field report that rebuilt a 16-page site and measured everything. Four changes matter for how you work on Divi 5:
+
+**Respira-built pages now use Divi's own styling engine.** Every Divi 5 write stamps the marker Divi's dynamic-assets pipeline requires, so Divi generates CSS from module attributes and presets instead of forcing every design decision into child-theme CSS. Existing pages transition automatically on their next Respira edit, under a snapshot.
+
+<Callout kind="info">
+The first edit that activates the pipeline on a page returns a warning worth reading: Divi loads its base CSS selectively in this mode, and image wrappers can need a `display:block;width:100%` rule in the child theme if images collapse. The warning names the fix.
+</Callout>
+
+**Global presets are tools.** `list_divi_presets`, `upsert_divi_presets` (bulk, idempotent by name), `delete_divi_preset`, and `resolve_divi_preset`. A brand profile installed as presets is editable by the next person in the Visual Builder.
+
+**The Divi Library is tools.** `save_divi_library_item` saves a page, one section of it, or a supplied structure as a real Library item. `apply_divi_library_item` places it on a page as a live-linked global reference: the page stores only the reference, Divi expands it at render, and editing the item once updates every page that carries it. Use this whenever the same section belongs on several pages.
+
+**One payload vocabulary.** Canonical Divi 5 attribute groups are accepted on every write path, underscore spellings of module names (`contact_form`) resolve, contact forms build with real field identities, and the module list reads Divi's live registry: 112 module types on Divi 5.11, WooCommerce's 24 only when WooCommerce is active, and third-party module suites (Divi Supreme and family) listed and marked as third-party.
+
 ## What Divi 5 support means in Respira
 
 Divi 5 support in Respira focuses on safe reading and editing of both layout formats without changing how Divi itself works.
@@ -54,7 +70,7 @@ Divi 5 support in Respira focuses on safe reading and editing of both layout for
 **Respira behavior**
 
 - Respira can read, edit, and save Divi 5 pages as blocks safely.
-- Respira builds real, editable modules from a 108-module catalog. Ask for the catalog with `get_builder_inline_schemas`.
+- Respira builds real, editable modules from a 112-module catalog (Divi 5.11). Ask for the catalog with `get_builder_inline_schemas`.
 - Respira continues supporting Divi 4 pages by reading and writing the existing `et_pb_*` shortcodes.
 - Respira does not perform automatic conversion between these formats.
 
@@ -410,7 +426,7 @@ All `divi/*` modules accept a `settings` object with shorthand keys. Respira map
 
 ## Recent capabilities (plugin v7.5.x)
 
-- **Native, editable module builds across a 108-module catalog.** `build_page` writes real `divi/*` modules from the catalog, discoverable through `get_builder_inline_schemas`, instead of falling back to a raw code block.
+- **Native, editable module builds across a 112-module catalog (Divi 5.11).** `build_page` writes real `divi/*` modules from the catalog, discoverable through `get_builder_inline_schemas`, instead of falling back to a raw code block.
 - **Invented type names are coerced, not written verbatim.** An unmapped or made-up type name (for example `hero_section`) is coerced to the nearest native `divi/` block with a warning, so it no longer renders as a phantom "Unknown Module".
 - **Content lands in the bucket the renderer reads.** Loose content shapes are normalized into the `settings` bucket, so a module renders instead of coming back as an empty container.
 - **Custom CSS group recognized.** The universal `css` group is accepted on `update_module` instead of being flagged as an unknown group.

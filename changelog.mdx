@@ -52,6 +52,28 @@ Not a WP-CLI replacement. WP-CLI is excellent for server-side WordPress administ
 
 ## WordPress Plugin Releases
 
+<Update label="2026-08-30" description="Respira for WordPress v8.8.0 + v8.8.1 + MCP Server 8.3.15-8.3.17: the field report, answered" tags={["release", "divi", "presets", "library", "safety"]}>
+
+### The field-report releases
+
+A customer rebuilt a 16-page Divi 5 site with Respira, measured every section against the original to the pixel, and sent a report with eleven findings. These releases answer all of them.
+
+**Divi 5, structurally better**
+- Respira-built Divi 5 pages activate Divi's own styling engine (the Visual Builder version marker is stamped on every write), so presets work and designs stop living in child-theme CSS. Existing pages transition on their next edit, under a snapshot.
+- Global presets as tools: list, bulk upsert (idempotent by name), delete, and resolve.
+- The Divi Library as tools: save a page or one section as a Library item, apply it to pages as a live-linked global reference. Edit the item once, every page carrying it updates.
+- One payload vocabulary across write paths, contact forms build with real field identities, underscore module spellings resolve, and the module list reads Divi's live registry (112 types on Divi 5.11, third-party suites included and marked).
+
+**Honesty fixes**
+- The phantom "4KB payload limit" was a schema bug in the MCP server, now accepting the canonical array shape.
+- find_builder_targets no longer reports a Divi 5 page as empty; get_page_outline accepts `id`; batch_update stops advertising an action the server rejected; `_presetId` means the same thing on every write path.
+- Theme-builder tools refuse JSON-encoded structures instead of storing them as visible text.
+- On white-labeled multisites, the studio logo no longer wallpapers network admin.
+
+Full details in the [GitHub release notes](https://github.com/webmyc/respira-wordpress/releases). Thank you, Bronko.
+
+</Update>
+
 <Update label="2026-07-26" description="Respira for WordPress v8.0.0 'Canopy' + MCP Server v8.0.0 + WooCommerce Add-on v4.0.0: the native Site Editor" tags={["release", "gutenberg", "fse", "site-editor", "safety"]}>
 
 ### What's New in v8.0.0 "Canopy"
