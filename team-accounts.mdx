@@ -1,23 +1,118 @@
 ---
 title: "Team Accounts"
-description: "Put more than one person on a single Respira account, with a per-member access level enforced at token introspection."
+description: "Put more than one person on a single Respira account: four seat types, per-seat access enforced at token introspection, site packs for editors, pinned sites for clients, and billing that only counts months somebody worked."
 ---
 
 # Team Accounts
 
 A team account lets more than one person work under a single Respira account. The team owns the licenses, and therefore the sites and packs. Members connect their own agents to those sites without needing their own separate subscription.
 
-Every existing account is already a team of one. Team features only surface once a second member is invited, and a single-user account behaves exactly as it did before.
+Every existing account is already a team of one. Team features only surface once a second person is invited, and a single-user account behaves exactly as it did before.
 
-## How access works
+<Callout kind="alert">
+The seat model changed on 20 August 2026. The one free seat on every plan is now a **client** seat: read-only and pinned to sites you choose. Editors and admins are paid from the first one, and a second client costs money. If you read an older version of this page, the section below is the current model.
+</Callout>
 
-Each member has an access level. From the dashboard dropdown you pick one of three:
+## The four seat types
 
-- **read-only** — the member's agent is capped to read. It can inspect sites but not write.
-- **editor** — full read and write on the sites the member is granted.
-- **admin** — account-grade capabilities, with editor-level access to sites.
+| Seat | What it can do | What it sees | What it costs |
+| --- | --- | --- | --- |
+| **Owner** | Everything, and holds billing. There is exactly one, and the owner's access level cannot be changed. | Every site the team owns | Free, always |
+| **Admin** | Manages people, sites and packs. Reads and writes like an editor. | Every site the team owns. Admins are never scoped by packs. | €10 a month each, from the first one |
+| **Editor** | Reads and writes on the sites it can reach. | Every team site, or only the sites in the packs granted to it. | €5 a month each, from the first one |
+| **Client** | Read only. It cannot change anything, on any site, whatever the prompt says. | Only the sites pinned to that seat | The first client on a plan is free. Every client after that is €3 a month |
 
-The access level is enforced at token introspection. When a member's agent connects, Respira checks the member's live access level for the team that owns the site and hands the plugin the matching scope. The plugin only honors the scope introspection returns, so lowering someone to read-only takes effect on their next connection without any change to the plugin or the site keys. Changes land within the plugin's roughly one-minute introspection cache.
+Prices are flat at any team size. There are no volume brackets and no seat pack to size up front.
+
+The short version of the deal: everybody who can change a site is paid, and the free seat is the one that cannot.
+
+<Callout kind="info">
+There is also a plain **read-only** access level, which is a member capped to read but still scoped by packs rather than pinned to sites. It is billed as an editor, at €5 a month, because it is a member seat that happens to be capped. If you want a read-only person at the client price, invite them as a client instead.
+</Callout>
+
+Full pricing detail lives at [respira.press/fair-billing](https://www.respira.press/fair-billing).
+
+## A seat bills only in a month it worked
+
+A seat is **active** in a month when that person ran at least one successful write through the team, or changed a page, post or builder content on a team site. Signing in, listing sites, reading a page and opening the audit log are all watching, and watching is free.
+
+- **Quiet months cost nothing.** An inactive member keeps every capability they would have if they were active. They cost nothing until the month they act.
+- **A quiet seat does not take the free slot either.** The one free client seat goes to a client who was actually active, so a dormant row never leaves a working client paying.
+- **Not accepted, not billed.** Someone invited who has not joined yet is never billed.
+- **Monthly, in arrears, prorated by active days.** The receipt covers the month that already happened, prorated by the days that seat acted, not by how long the person has been on the team.
+
+## Your first 30 days
+
+Every new team gets 30 days with unlimited seats free, on Builder and above. This is not a launch promotion. Every team that has never invited anybody gets its own window.
+
+- **The clock starts on your first invite.** Not when the team is created and not when you open the page.
+- **Set once, never reset.** The start date is recorded a single time. Re-inviting somebody, or inviting somebody later, does not move it.
+- **On Maker the cap holds through the window**, so nothing changes on you when it ends.
+
+When the window closes, nothing starts billing until the owner picks how it should work:
+
+- **Bill active seats** applies the fair-billing rules above and charges in arrears.
+- **Ask before each person bills** puts a new person's first billable activity in front of the owner for approval.
+- **No choice, no charge.** If the owner picks nothing, everyone past the owner and the free client seat pauses. They keep dashboard access, nothing is deleted, nothing bills, and one action brings them back.
+
+Every consent, mode change and pause is written to the team audit log.
+
+## Which plans carry which seats
+
+- **Lite and plan-less accounts cannot invite.** Team seats ride on a paid plan, because a seat has to have an owner who can be billed.
+- **Connect a site first.** Inviting is refused until the team has at least one active connected site. A member's agent needs somewhere to work.
+- **Maker is you plus one free client seat**, with nothing billable. No paid editor, admin or client seats, even during the free window.
+- **Paid seats of every kind, and site packs, start on Builder.**
+- **Grandfathered and comped seats are free** and stay recorded on the seat itself.
+
+## Inviting people
+
+Invites are sent by the owner or an admin from the team page in the dashboard. Each invite is an email address plus the seat type you want that person to have. Respira emails a sign-in link that lands them on their team settings, and the pending seat is claimed the first time they sign in.
+
+**Invite an editor.** The default. Give the email address and send. The person can read and write on the sites their scope allows.
+
+**Invite an admin.** Pick admin as the level. They can invite and remove people, change access levels, and manage sites and packs. They see every team site.
+
+**Invite a read-only member.** Pick read-only. Their agent is capped to read, and they are scoped by packs like an editor.
+
+**Invite a client.** Pick client and name at least one site in the same step. An invite with no site is refused, because a client with no site can reach nothing and that reads as a broken account rather than a restricted one.
+
+Re-inviting somebody who already has a pending seat is a resend, not a new seat, and it keeps the level the seat already has. Inviting somebody who is already an active member is refused.
+
+To change a seat later, set the level on the same team page. Two rules apply:
+
+- Turning somebody into a client requires them to have at least one site granted first.
+- Moving somebody off a client seat drops their direct site grants at the same time, so no invisible rule is left behind for an editor who is now scoped by packs.
+
+## Site packs scope an editor
+
+A site pack is a named group of the team's sites. Owners and admins create packs on the team page, and only sites the team actually owns can go into one. Packs and paid client seats are available on Builder and above.
+
+Packs are an editor tool. They exist for somebody who works across several of your sites but not all of them.
+
+1. Create a pack and give it a name, for example `Retail clients`.
+2. Add the team sites that belong in it.
+3. Turn off the team setting that lets every member reach every site. While that setting is on, which is the default, an editor reaches every team site and packs are only an organizing device.
+4. Grant each editor the packs they should work in.
+
+With the team-wide setting off, an editor reaches a site only if that site is in one of the packs granted to them. An editor with no packs granted reaches nothing. Owners and admins are never pack-scoped and always see every site.
+
+## A client is pinned to their sites
+
+A client is the other shape entirely: one person who should see one site. So a client is pinned to sites directly on their own seat, not through a pack.
+
+- The sites are chosen when the client is invited, and can be changed on the team page afterwards.
+- A client **never** consults the team's "every member can reach every site" setting. Turning that setting on does not widen a client, and turning it off does not narrow one. The pinning is the whole rule.
+- A client is capped to read on every site it can reach.
+- Only sites the team owns are accepted, so a stale or guessed site id in a request cannot hand somebody a site on another account.
+
+This is the seat to use when you build a site for a customer and want to hand them a login that shows their site and nothing else.
+
+## How access is enforced
+
+The access level is enforced at token introspection. When a member's agent connects, Respira checks that member's live access level for the team that owns the site and hands the plugin the matching scope. The plugin only honors the scope introspection returns, so lowering somebody to read-only takes effect on their next connection without any change to the plugin or the site keys. Changes land within the plugin's roughly one-minute introspection cache.
+
+Scoping is enforced in the same place. If the site is outside a client's pinned sites, or outside a pack-scoped editor's granted packs, the request is refused rather than quietly downgraded.
 
 ## Per-member tokens
 
@@ -26,27 +121,11 @@ A member's token keeps that member's own user id for revocation and audit, while
 - Removing a member revokes only that member's tokens. The team's site-connection keys never rotate, so other members and the connected sites are unaffected.
 - Each member's MCP setup codes carry the team's sites through that member's own token. A member gets working setup codes for the team sites without the owner having to reshare a site key.
 
-## Inviting people
-
-Invites are sent from the dashboard team page by email. Someone you invited who has not accepted yet is never billed. Each member's edits appear in the team audit log under their own identity, so you can see who changed what across every connected site.
-
-## Seats and fair billing
-
-A plan buys your sites; a seat is what you add when another person works alongside you. Full detail at [respira.press/fair-billing](https://www.respira.press/fair-billing); the short version:
-
-- **Owner: always free.** You are also the team's first admin, free.
-- **First member: free, on every plan.** A two person team costs nothing beyond the plan.
-- **Extra members: €5 a month each**, flat at any team size. **A second admin and beyond: €10 a month each.**
-- **Seats bill only in months they are active.** A seat is active when that person ran at least one agent command or made at least one change through the team. Signing in, viewing sites, or reading the audit log is watching, and watching is free. Billing is monthly, in arrears, prorated by active days.
-- **Client seats are free.** A client seat sees exactly one group of sites and nothing else, never billed. Available on Builder and above.
-- **On Maker, your team is you plus one, free forever.** That free plus-one doubles as the client handoff seat. Paid member and client seats start on Builder.
-- **Every new team gets 30 days with unlimited free seats** (Builder and above). The clock starts on your first invite, recorded once. When the window ends, nothing bills until you choose how billing should work: auto-bill active seats, ask before each new person starts billing, or, if you choose nothing, everyone past you plus one pauses with dashboard access intact and nothing deleted.
-- **Founding members stay free.** Anyone holding a seat when team accounts launched is free for life, recorded on the seat itself.
-
-Every consent, mode change and pause is written to the team audit log.
+Each member's edits appear in the team audit log under their own identity, so you can see who changed what across every connected site.
 
 ## Related
 
-- [Multi-Site Management](/guides/multi-site-management) — working across the team's sites
-- [Team Workflows](/guides/team-workflows) — safe review patterns for teams
-- [API key management](/security/api-key-management) — how tokens and revocation work
+- [Multi-Site Management](/guides/multi-site-management) for working across the team's sites
+- [Team Workflows](/guides/team-workflows) for safe review patterns
+- [API key management](/security/api-key-management) for how tokens and revocation work
+- [Sites](/dashboard/sites) for the per-site audit log and token rotation
